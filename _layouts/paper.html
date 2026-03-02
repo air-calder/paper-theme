@@ -1,0 +1,180 @@
+---
+layout: default
+---
+
+<div class="publication-page">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ site.hub_url | default: '/publications' | relative_url }}">Publications</a></li>
+      {% if page.breadcrumb_extra %}
+      <li class="breadcrumb-item"><a href="{{ page.breadcrumb_extra.url | relative_url }}">{{ page.breadcrumb_extra.title }}</a></li>
+      {% endif %}
+    </ol>
+  </nav>
+
+  <article class="publication" itemscope itemtype="https://schema.org/ScholarlyArticle">
+
+    <!-- Publication type badge -->
+    {% if page.paper_type %}
+    <div class="pub-type">
+      <svg class="pub-type-icon" height="18" width="14" viewBox="0 0 384 512" aria-hidden="true">
+        <path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM112 256l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+      </svg>
+      <span>{{ page.paper_type }}</span>
+    </div>
+    {% endif %}
+
+    <!-- Title -->
+    <h1 class="pub-title" itemprop="headline">{{ page.title }}</h1>
+
+    <!-- Authors -->
+    {% if page.authors %}
+    <div class="pub-authors" itemprop="author">
+      {{ page.authors }}
+    </div>
+    {% endif %}
+
+    <!-- Year -->
+    {% if page.year %}
+    <div class="pub-meta">
+      <span class="pub-meta-label">Year:</span>
+      <span class="pub-meta-value" itemprop="datePublished">{{ page.year }}</span>
+      {% if page.paper_number %}
+      &ensp;&middot;&ensp;
+      <span class="pub-meta-value">{{ page.paper_number }}</span>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Cite link -->
+    <div class="pub-cite-link">
+      <a href="#pub-citation">Cite Publication</a>
+    </div>
+
+    <!-- Abstract -->
+    {% if page.abstract %}
+    <div class="pub-abstract" itemprop="abstract">
+      <p>{{ page.abstract }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Paper body content (optional: for papers with full text on the page) -->
+    {% if content != "" and content != "<p></p>\n" %}
+    <div class="pub-body">
+      {{ content }}
+    </div>
+    {% endif %}
+
+    <!-- DOI -->
+    {% if page.doi %}
+    <div class="pub-doi">
+      <strong>DOI:</strong>&nbsp;
+      <a href="https://doi.org/{{ page.doi }}" itemprop="identifier">{{ page.doi }}</a>
+    </div>
+    {% endif %}
+
+    <!-- Download and external links -->
+    <div class="pub-actions">
+      {% if page.pdf_url %}
+      <a class="btn btn-primary" href="{{ page.pdf_url }}" title="Download Publication">
+        Download
+        <svg class="btn-icon" height="14" width="14" viewBox="0 0 512 512" aria-hidden="true">
+          <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+        </svg>
+      </a>
+      {% endif %}
+      {% if page.external_url %}
+      <a class="btn btn-secondary" href="{{ page.external_url }}" title="View at Publisher">
+        View at Publisher
+        <svg class="btn-icon" height="14" width="14" viewBox="0 0 512 512" aria-hidden="true">
+          <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
+        </svg>
+      </a>
+      {% endif %}
+      {% if site.github.repository_url %}
+      <a class="btn btn-secondary" href="{{ site.github.repository_url }}" title="View project on GitHub">
+        View on GitHub
+        <svg class="btn-icon" height="14" width="14" viewBox="0 0 496 512" aria-hidden="true">
+          <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 389.5 8 244.8 8z"/>
+        </svg>
+      </a>
+      {% endif %}
+    </div>
+
+    <!-- Research areas -->
+    {% if page.research_areas %}
+    <div class="pub-research-areas">
+      <span class="pub-meta-label">Research Area</span>
+      <div class="tag-list">
+        {% for area in page.research_areas %}
+        <span class="tag">{{ area }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Citation -->
+    {% if page.citation %}
+    <div class="pub-citation-section" id="pub-citation">
+      <div class="pub-meta-label">Citation</div>
+      <div class="citation-box">
+        <p id="citation-text" class="citation-text">{{ page.citation }}</p>
+        <button class="btn btn-sm copy-btn" onclick="copyCitation()" aria-label="Copy citation to clipboard">
+          <svg height="13" width="13" viewBox="0 0 448 512" aria-hidden="true">
+            <path d="M208 0L332.1 0c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9L448 336c0 26.5-21.5 48-48 48l-192 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48zM48 128l80 0 0 64-64 0 0 256 192 0 0-32 64 0 0 48c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 176c0-26.5 21.5-48 48-48z"/>
+          </svg>
+          Copy
+        </button>
+      </div>
+    </div>
+    {% endif %}
+
+  </article>
+
+  <!-- Related Publications -->
+  {% if page.related %}
+  <section class="related-publications" aria-labelledby="related-heading">
+    <h2 id="related-heading">Related Publications</h2>
+    <div class="related-list">
+      {% for pub in page.related %}
+      <div class="related-card">
+        <div class="pub-type pub-type-sm">
+          <svg class="pub-type-icon" height="14" width="11" viewBox="0 0 384 512" aria-hidden="true">
+            <path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM112 256l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+          </svg>
+          <span>{{ pub.type | default: "Short Paper" }}</span>
+        </div>
+        <h3 class="related-card-title">
+          <a href="{{ pub.url }}">{{ pub.title }}</a>
+        </h3>
+        <div class="related-card-authors">{{ pub.authors }}</div>
+        <div class="related-card-date">{{ pub.date }}</div>
+        {% if pub.research_areas %}
+        <div class="tag-list tag-list-sm">
+          {% for area in pub.research_areas %}
+          <span class="tag">{{ area }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+</div>
+
+<script>
+function copyCitation() {
+  var text = document.getElementById('citation-text').innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.querySelector('.copy-btn');
+    var orig = btn.innerHTML;
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.innerHTML = orig; }, 2000);
+  });
+}
+</script>

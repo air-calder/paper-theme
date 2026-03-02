@@ -1,0 +1,44 @@
+title: CALDER Short Papers
+description: Short papers from the Center for Analysis of Longitudinal Data in Education Research
+
+# baseurl: the path this repo is served at when used as a demo/theme site.
+# GitHub Pages project sites are served at /<repo-name>/.
+# Set to "" in paper repos that use remote_theme (they're org sub-paths, not project sites).
+baseurl: "/paper-theme"
+url: "https://air-calder.github.io"
+
+# hub_url: where the "Publications" breadcrumb and nav link point.
+# Paper repos inherit this automatically via remote_theme.
+hub_url: "https://air-calder.github.io"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+highlighter: rouge
+
+# Navigation — all absolute URLs so they work from any paper sub-path
+nav_links:
+  - title: About
+    url: "https://caldercenter.org/about"
+  - title: Publications
+    url: "https://caldercenter.org/publications"
+  - title: Experts
+    url: "https://caldercenter.org/experts"
+  - title: All Short Papers
+    url: "https://air-calder.github.io"
+
+# Footer
+footer_address_html: |
+  <strong>Center for Analysis of Longitudinal Data in Education Research</strong><br>
+  American Institutes for Research<br>
+  1400 Crystal Drive, 10th Floor<br>
+  Arlington, VA 22202
+
+social_links:
+  - label: X (Twitter)
+    url: "https://x.com/caldercenter"
+    icon: x
+  - label: Bluesky
+    url: "https://bsky.app/profile/caldercenter.bsky.social"
+    icon: bluesky
