@@ -22,7 +22,7 @@ citation: >
   Jane Smith, Robert Johnson (2026). Teacher Value-Added and Student Outcomes: A
   Methodological Note. CALDER Short Paper No. 000-0000. https://doi.org/10.00000/EXAMPLE
 related:
-  - title: Raising the Floor: Teacher Retention Effects of a Statewide Minimum Salary Increase
+  - title: "Raising the Floor: Teacher Retention Effects of a Statewide Minimum Salary Increase"
     url: /papers/raising-floor
     authors: "Gema Zamarro, Andrew M. Camp, Josh McGee, Taylor Wilson, Miranda Vernon"
     date: February 25, 2026
