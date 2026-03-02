@@ -19,6 +19,35 @@
   {% if page.math %}
   <script>
     MathJax = {
+      startup: {
+        ready() {
+          // kramdown converts underscores after non-word chars (e.g. "}_") inside
+          // $...$ into <em> tags spanning multiple math expressions.  This hook
+          // detects those mangled <em> elements and restores the underscore before
+          // MathJax processes the page.
+          var sel = '.pub-body p, .pub-body li, .pub-body td, .pub-abstract p';
+          document.querySelectorAll(sel).forEach(function (el) {
+            Array.from(el.querySelectorAll('em')).reverse().forEach(function (em) {
+              var prev = em.previousSibling;
+              if (!prev || prev.nodeType !== Node.TEXT_NODE) return;
+              var prevText = prev.textContent;
+              // An odd $ count means we are inside an open inline-math span.
+              if (((prevText.match(/\$/g) || []).length) % 2 !== 1) return;
+              // Restore the opening underscore.
+              prev.textContent = prevText + '_' + em.textContent;
+              // The closing underscore may also have been consumed; if the text
+              // after </em> starts with a LaTeX brace or command, restore it.
+              var next = em.nextSibling;
+              if (next && next.nodeType === Node.TEXT_NODE && /^[{\\]/.test(next.textContent)) {
+                next.textContent = '_' + next.textContent;
+              }
+              em.parentNode.removeChild(em);
+            });
+            el.normalize();
+          });
+          MathJax.startup.defaultReady();
+        }
+      },
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
