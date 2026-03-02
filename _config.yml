@@ -13,8 +13,6 @@ hub_url: "https://air-calder.github.io"
 
 # Build settings
 markdown: kramdown
-kramdown:
-  math_engine: mathjax
 highlighter: rouge
 
 # Navigation — all absolute URLs so they work from any paper sub-path
